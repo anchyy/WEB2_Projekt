@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+       
+{% block body %}
+<div class=" " style="margin-top: 8%;">
+    <div class="container thumbs">
+        <div class="content-section" >
+            <h2>Osobni podaci</h2>
+            <hr/>
+        <div class="row">
+          <div class="col-sm-4">
+              <p ><i class="fa fa-user"></i> Ime i Prezime: {{ user.name }} {{ user.surname }}</p>
+              
+            <p class="text-secondary"><i class="fa fa-address-card"></i> Adresa: {{user.address}}</p>
+
+          </div>
+          <div class="col-sm-4">
+              <p class="text-secondary"><i class="fa fa-envelope"></i>  Email: {{user.email}}</p>
+            <p class="text-secondary"><i class="fa fa-phone"></i> Telefon: {{user.telephone}}</p>
+          </div>
+        </div> 
+   <br/><br/>
+   
+</div>
+</div>
+</div>
+ <div class="row"  >  
+    <div class="container thumbs">
+        <div class="content-section" >
+    <h2>Rezervacije</h2>
+     <table class="table">
+       <tr>
+         
+         <td style=" width: 20%;">Brod</td> 
+         <td style=" width: 20%;">Datum od</td> 
+         <td style=" width: 20%;">Datum do</td> 
+         <td style=" width: 20%;">Opcija</td> 
+       </tr>
+         {% for i in reservations %}
+        <tr>
+            <td style=" width: 20%;" >{{i.boat_name}}</td>
+            <td style=" width: 20%;">{{ i.date_from }}</td>
+            <td style=" width: 20%;">{{ i.date_to }}</td>
+            <td style=" width: 20%;">
+              {% if i.reservation_cancellation %}
+              <a href="/active/{{i.id}}"> <button class="btn btn-primary">Aktiviraj rezervaciju</button></a> 
+              {% else %}
+             <a href="/cancel/{{i.id}}"><button class="btn btn-primary" >Otkaži rezervaciju</button></a>
+              {% endif %}
+            </td>
+           
+           </tr>
+         {% endfor%}
+     </table>
+   </div>
+  </div>
+</div>
+{% endblock %}
+

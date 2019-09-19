@@ -1,0 +1,120 @@
+{% extends "base.html" %}
+       
+{% block body %}
+<div class="jumbotron">
+  <div class="container">
+    <div class="col-xs-12">
+    
+    </div>
+  </div><!-- End Slide gallery -->
+</div>
+<div class="container thumbs">
+  <div class="col-sm-12">
+ <!-- Slide gallery -->
+<br/>
+ <div class="row">
+    <div class="col-sm-6"  style="margin-top: 5%;">
+        {% for i in images %} 
+        <img class="mySlides" src="/{{i.image}}" style="width: 450px;height:400px;" >
+      
+        {% endfor %}
+        <button class="w3-button w3-display-left" onclick="plusDivs(-1)">&#10094;</button>
+        <button class="w3-button w3-display-right" onclick="plusDivs(+1)">&#10095;</button>
+
+       
+    </div>
+      <div class="col-sm-6"> 
+<h3> {{boat.name}} </h3>
+        <table class="table">
+          <tr>
+          
+            <td style="text-align: left !important;"> <span>Kapacitet: {{boat.people_number}} osoba</span></td>
+            <td style="text-align: left !important;"> <span>Kabine: {{boat.cabine}} </span></td>
+            <td style="text-align: left !important;"> <span>Toaleti: {{boat.toilets}} </span></td>
+          </tr>
+          <tr>
+             <td style="text-align: left !important;"> <span>Duljina: {{boat.length}} m</span></td>
+            <td style="text-align: left !important;"> <span>Motor: {{boat.engine}} </span></td>
+            <td style="text-align: left !important;"> <span>Gorivo: {{boat.fuel}} </span></td>
+          </tr>
+          <tr>
+              <td colspan="3" style="text-align: left !important;"> <span>Cijena u sezoni: (01.06.-31.08):  {{ '%0.2f'| format(boat.price_season|float)}} €</span></td> 
+            </tr>
+            <tr>
+                <td colspan="3" style="text-align: left !important;"><span>Cijena izvan sezone: (01.04.-30.05, 01.09.30.11):{{'%0.2f'| format(boat.price_outOfSeason|float)}} €</td> 
+              </tr>
+        </table>
+<hr/>
+          <form action="reservation" method="POST">
+              <input type="hidden" name="boatId" value="{{boat.id}}"> 
+              <input type="hidden" name="boat_name" value="{{boat.name}}"> 
+                <div class="col-sm-12">
+                    <div class="form-group"> 
+                        <input type="text" name="email" class="form-control" placeholder="email" value="{{ session['username'] }}" readonly='readonly'>
+                    </div>
+                  </div> 
+                    <div class="col-sm-12">
+                        <div class="form-group">
+                            <input type="text" name="datefrom" class="form-control" placeholder="Datum od (yyyy-mm-dd)" required>
+                        </div>
+                      </div>
+                      <div class="col-sm-12">
+                          <div class="form-group">
+                              <input type="text" name="dateto" class="form-control" placeholder="Datum do (yyyy-mm-dd)" required>
+                            </div>
+                        </div>
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <textarea rows="4" cols="30" name="description" class="form-control" placeholder="Napomena">
+                                </textarea> 
+                              </div>
+                          </div>
+                          
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                              {% if session["username"] %}
+                                <input type="submit" name="confirm" class="form-control" value="Rezerviraj">
+                                {% else %}
+                                <input type="submit" name="confirm" class="form-control" disabled="disabled " value="Rezerviraj">
+                                {% endif %}
+                            </div>
+                        </div>
+                        </form>
+           
+      </div>
+    </div>
+ <br/>
+    
+  </div>
+{% endblock %}
+
+ </div>
+
+ <div class="container thumbs">
+
+  
+   </div>
+
+ {% block scripts %}
+
+<script>
+var slideIndex = 1;
+showDivs(slideIndex);
+
+function plusDivs(n) {
+  showDivs(slideIndex += n);
+}
+
+function showDivs(n) {
+  var i;
+  var x = document.getElementsByClassName("mySlides");
+  if (n > x.length) {slideIndex = 1} 
+  if (n < 1) {slideIndex = x.length} ;
+  for (i = 0; i < x.length; i++) {
+    x[i].style.display = "none"; 
+  }
+  x[slideIndex-1].style.display = "block"; 
+}
+
+</script>
+ {% endblock %}

@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+       
+{% block body %}
+
+<div class="jumbotron">
+    <div class="container thumbs">
+    <div call="container">
+
+    <div class="row" style="padding-top: 5%;">
+        <h1 style="text-align: center">Prijava</h1><br>
+    </div>
+    </div>
+    <div class="row" style="margin-left: 25%;"  >
+        {% if message != null%}
+        <div class="row">
+        <p>{{message}}</p>
+        </div>
+        {% endif %}
+        <form action="" method="POST">    
+        <div class="col-sm-8">
+            <div class="form-group">
+                <input type="text" name="email" class="form-control" placeholder="E-mail" required>
+            </div>
+        </div>
+        <div class="col-sm-8">
+            <div class="form-group">
+                <input type="password" name="password" class="form-control" placeholder="Lozinka" required>
+            </div>
+        </div>       
+        <div class="col-sm-8">
+            <div class="form-group">
+                <input type="submit"   class="form-control" value="Potvrdi">
+            </div>
+        </div>
+        </form>
+    </div>
+</div>
+</div>
+</div>
+ 
+
+ </div>
+
+ 
+
+
+ {% endblock %}
